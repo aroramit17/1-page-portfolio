@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import SITE_DATA from '../data/site.js';
+import '../styles/case-study.css';
+
+const study = SITE_DATA.caseStudies.find((c) => c.slug === 'webai-case-study');
+if (!study) throw new Error('Missing webai-case-study entry in SITE_DATA.caseStudies');
+
+const siteUrl = `https://${SITE_DATA.domain}`;
+const url = `${siteUrl}/${study.slug}`;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": study.title,
+  "url": url,
+  "description": study.blurb,
+  "about": study.tag,
+  "author": {
+    "@type": "Person",
+    "name": SITE_DATA.name,
+    "url": siteUrl
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": SITE_DATA.name,
+    "url": siteUrl
+  },
+  "isPartOf": {
+    "@type": "CollectionPage",
+    "name": "Case Studies",
+    "url": `${siteUrl}/case-studies`
+  }
+});
+---
+<BaseLayout
+  title={`${study.title} | Case Study | ${SITE_DATA.name}`}
+  description={study.blurb}
+  canonical={url}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <CaseStudy study={study} />
+</BaseLayout>

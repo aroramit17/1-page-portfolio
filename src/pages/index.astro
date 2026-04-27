@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import App from '../components/Sections.jsx';
+import SITE_DATA from '../data/site.js';
+import '../styles/home.css';
+
+const siteUrl = `https://${SITE_DATA.domain}`;
+const [city, region] = (SITE_DATA.location || '').split(',').map(s => s.trim());
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": SITE_DATA.name,
+  "url": siteUrl,
+  "image": `${siteUrl}/headshot.png`,
+  "jobTitle": SITE_DATA.experience?.[0]?.role || "",
+  "description": SITE_DATA.sub,
+  "address": city ? {
+    "@type": "PostalAddress",
+    "addressLocality": city,
+    "addressRegion": region || "",
+    "addressCountry": "US"
+  } : undefined,
+  "sameAs": [
+    SITE_DATA.social?.linkedin,
+    SITE_DATA.social?.youtube,
+    SITE_DATA.social?.medium
+  ].filter(Boolean)
+});
+
+const pageTitle = `${SITE_DATA.name} — ${SITE_DATA.tagline}`;
+---
+<BaseLayout
+  title={pageTitle}
+  description={SITE_DATA.sub}
+  canonical={`${siteUrl}/`}
+  jsonLd={jsonLd}
+>
+  <App client:load />
+</BaseLayout>

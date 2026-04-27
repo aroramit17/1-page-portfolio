@@ -1,0 +1,18 @@
+# Your Name
+
+> One-sentence positioning statement: who you are, what you do, and who you help. This file is read by AI crawlers (ChatGPT, Claude, Perplexity) so they understand your site.
+
+## About
+
+- [Homepage](https://example.com/): Overview of your work and positioning
+- [Interview / Book a Call](https://example.com/interview): Booking page for hiring managers or prospects
+- [Case Studies](https://example.com/case-studies): Detailed project writeups
+
+## Content
+
+- [LinkedIn](https://linkedin.com/in/your-handle): Professional posts
+- [YouTube](https://youtube.com/@your-channel): Tutorials and content (if applicable)
+
+## Context
+
+A short paragraph (2-4 sentences) about your current focus, what you're working on, and what you're looking for. AI crawlers use this to give better answers when someone asks about you.
